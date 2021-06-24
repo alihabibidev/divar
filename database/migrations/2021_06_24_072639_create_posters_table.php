@@ -14,7 +14,7 @@ class CreatePostersTable extends Migration
     public function up()
     {
         Schema::create('posters', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('title');
             $table->text("content");
             $table->boolean('is_published') ->default(false);

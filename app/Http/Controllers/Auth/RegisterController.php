@@ -47,7 +47,7 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -62,7 +62,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param array $data
      * @return \App\Models\User
      */
     protected function create(array $data)
@@ -75,16 +75,14 @@ class RegisterController extends Controller
     }
 
 
+    public function showregister()
+    {
 
-
-
-
-    public function  showregister(){
-
-          return view('users.register');
+        return view('users.register');
     }
 
-    public function  register(Register $request){
+    public function register(Register $request)
+    {
 
 
         $user = $request->validated();
@@ -92,18 +90,11 @@ class RegisterController extends Controller
         $user = User::create([
             'fname' => $request->fname,
             'lname' => $request->lname,
-            'phone_number' =>$request->phone_number,
-            'verification_code'=>rand(0,1000)
+            'phone_number' => $request->phone_number,
+            'verification_code' => rand(0, 1000)
         ]);
-       // return Redirect::route('' )->with(['user' => $user->id ]);
-        return redirect()->route('verify.index',['user'=>$user->phone_number]);
+        return view('users.verify', ['user' => $user]);
     }
-
-
-
-
-
-
 
 
 }
