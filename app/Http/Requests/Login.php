@@ -25,8 +25,7 @@ class Login extends FormRequest
     {
         return [
 
-                  'phone_number' => 'required |  numeric ',
-
+                  'phone_number' => 'required ',
         ];
     }
 }

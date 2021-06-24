@@ -30,23 +30,22 @@ class VerificationController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-
-    }
+//    public function __construct()
+//    {
+//
+//    }
 
 
     public function showverify(User $user)
     {
-        print_r($user->phone_number);
-        die();
+
         return view('users.verify', ['user' => $user]);
     }
 
@@ -56,12 +55,15 @@ class VerificationController extends Controller
 //        echo $request["verification_code"];
 //        echo $request['phone_number'];
 
-
-        if (Auth::attempt(['verification_code' => $request["verification_code"], 'phone_number' => $request['phone_number']])) {
-            return redirect()->route('home.index');
+        $user = User::where(["phone_number" => $request["phone_number"], "verification_code" => $request["verification_code"]])
+            ->first();
+        if ($user) {
+            Auth::login($user);
+            echo "<div style='background: red;color: #1a202c'>code matched</div>";
         } else {
             echo "<div style='background: red;color: #1a202c'>did not match</div>";
         }
     }
+
 
 }

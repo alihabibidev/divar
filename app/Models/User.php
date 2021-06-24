@@ -20,7 +20,7 @@ class User extends Authenticatable
         'fname',
         'lname',
         'phone_number',
-'verification_code'
+        'verification_code'
 
     ];
 

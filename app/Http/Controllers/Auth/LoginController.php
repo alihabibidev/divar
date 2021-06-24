@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Login;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -45,17 +47,20 @@ class LoginController extends Controller
     }
 
 
-    public function login(Login $request)
+    public function login(Login $request,User $user)
     {
+        $user = $request->validated();
+        if($user->phone_number === $request->phone_number){
+            $user = User::update([
+                'verification_code' => rand(0, 1000)
+            ]);
+        }
+        return view('users.verify', ['user' => $user]);
 
-
-
-
-
-
-
-
+//        if (Auth::attempt(['verification_code' => $request["verification_code"], 'phone_number' => $request['phone_number']])) {
+//            return redirect()->route('home.index');
+//        } else {
+//            echo "<div style='background: red;color: #256355'>did not match</div>";
+//        }
     }
-
-
 }
