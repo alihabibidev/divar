@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('layouts.app');
 })->name('home.index');
 
+Route::get('/add-poster', function () {
+    return view('add-poster');
+});
+Route::post('/add-poster', [\App\Http\Controllers\PosterController::class, 'addPoster']);
+
 //Auth::routes();
 //
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -35,3 +40,6 @@ Route::namespace('Auth')->group(function() {
 
 
 });
+
+
+
