@@ -24,8 +24,6 @@ class Register extends FormRequest
     public function rules()
     {
         return [
-            'fname' =>'required|string|max:8',
-            'lname' => 'required|string|max:8',
             'phone_number' => 'required |  numeric ',
         ];
     }

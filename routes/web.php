@@ -35,7 +35,7 @@ Route::namespace('Auth')->group(function() {
     Route::get('register', 'RegisterController@showregister')->name('register.form.show');
     Route::post('register', 'RegisterController@register')->name('register.index');
     Route::get('login', 'LoginController@showlogin')->name('login.show');
-    Route::post('login', 'LoginController@login')->name('login.form.index');
+    Route::post('login', 'LoginController@login')->name('login.index');
     Route::get('show/verify', 'VerificationController@showverify')->name('show.verify.index');
 
 
