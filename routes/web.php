@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('layouts.app');
 })->name('home.index');
 
-Route::get('/add-poster', function () {
+Route::get('/add-poster-page', function () {
     return view('add-poster');
 });
-Route::post('/add-poster', [\App\Http\Controllers\PosterController::class, 'addPoster']);
+Route::post('/add-poster-action ', [\App\Http\Controllers\PosterController::class, 'addPoster']);
+
+Route::get('/show-posters', [\App\Http\Controllers\PosterController::class, 'getPosters']);
 
 //Auth::routes();
 //

@@ -15,8 +15,10 @@ class PosterController extends Controller
     {
         $title = $request['title'];
         $content = $request['content'];
-        $user_id = $request['user_id'];
-        $category_id = $request['category_id'];
+//        $user_id = $request['user_id'];
+        $user_id = "1";
+//        $category_id = $request['category_id'];
+        $category_id = "1";
 
         $poster = new Poster();
         $image = new Image();
@@ -25,7 +27,8 @@ class PosterController extends Controller
             'file' => 'required|mimes:pdf,xlx,csv,png,jpeg,jpg,svg,gif|max:2048',
         ]);
 
-        $fileName = time() . Hash::make($title) . '.' . $request->file->extension();
+        $fileName = time() . '.' . $request->file->extension();
+//        $fileName = time() . Hash::make($title) . '.' . $request->file->extension();
         try {
             $request->file->move(public_path('uploads'), $fileName);
         } catch (\Exception $exception) {
@@ -42,7 +45,7 @@ class PosterController extends Controller
         $image->save();
 
         return back()
-            ->with('success', 'You have successfully upload file.')
+            ->with('success', 'اطلاعات با موفقیت ثبت شد')
             ->with('file', $fileName);
 
     }
@@ -56,8 +59,15 @@ class PosterController extends Controller
 
     public function getPosters()
     {
-        $poster = Poster::all();
-        return $poster;
+        $poster = Poster::with('images')->get();
+
+
+        return view('show-poster', ['posters' => $poster]);
+    }
+
+    public function showPoster()
+    {
+
     }
 
     public function updatePoster(Request $request)

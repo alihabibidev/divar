@@ -17,8 +17,8 @@ class CreateImagesTable extends Migration
             $table->bigIncrements('id');
             $table->text("path");
             $table->timestamps();
-            $table->unsignedBigInteger("image_id");
-            $table->foreign("image_id") -> references("id")-> on ("posters")
+            $table->unsignedBigInteger("poster_id");
+            $table->foreign("poster_id") -> references("id")-> on ("posters")
                 ->onDelete("cascade");
         });
     }
